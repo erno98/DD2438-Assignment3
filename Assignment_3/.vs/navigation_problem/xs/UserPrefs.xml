@@ -1,0 +1,25 @@
+﻿<Properties StartupConfiguration="{F9D2315C-4A30-8039-C7F9-C283C09FE88B}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scrips/TrajectoryLogger.cs">
+    <Files>
+      <File FileName="Assets/Standard Assets/Vehicles/Car/Scripts/CarAIControl.cs" Line="1" Column="1" />
+      <File FileName="Assets/Standard Assets/Vehicles/Car/Scripts/CarController.cs" Line="36" Column="59" />
+      <File FileName="Assets/Scrips/GameManager.cs" Line="12" Column="1" />
+      <File FileName="Assets/Scrips/SearchAndDestroy.cs" Line="53" Column="101" />
+      <File FileName="Assets/Scrips/TerrainManager.cs" Line="39" Column="44" />
+      <File FileName="Assets/Scrips/TrajectoryLogger.cs" Line="62" Column="25" />
+      <File FileName="Assets/Standard Assets/Vehicles/Car/Scripts/CarUserControl.cs" Line="34" Column="1" />
+      <File FileName="Assets/Scrips/DroneController.cs" Line="52" Column="11" />
+      <File FileName="Assets/Scrips/LookAt.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scrips/FollowObject.cs" Line="8" Column="36" />
+      <File FileName="Assets/Scrips/CarAI.cs" Line="31" Column="19" />
+      <File FileName="Assets/Scrips/GridPathFinder.cs" Line="33" Column="86" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

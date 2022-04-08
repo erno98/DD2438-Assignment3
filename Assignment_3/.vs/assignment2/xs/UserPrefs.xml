@@ -1,0 +1,19 @@
+﻿<Properties StartupConfiguration="{ECE6C991-EFEA-08D1-DAD3-0A3D6FA3C8DD}|">
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scrips/SearcherNaive.cs">
+    <Files>
+      <File FileName="Assets/Scrips/GreedyHunter.cs" Line="36" Column="30" />
+      <File FileName="Assets/Scrips/SearchAndDestroy.cs" Line="6" Column="31" />
+      <File FileName="Assets/Scrips/TerrainManager.cs" Line="166" Column="71" />
+      <File FileName="Assets/Scrips/RandomWallBounce.cs" Line="33" Column="36" />
+      <File FileName="Assets/Scrips/SearcherNaive.cs" Line="64" Column="105" />
+      <File FileName="Assets/Scrips/GameManager.cs" Line="44" Column="32" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>

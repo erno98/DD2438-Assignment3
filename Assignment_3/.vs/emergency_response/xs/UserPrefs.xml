@@ -1,0 +1,27 @@
+﻿<Properties StartupConfiguration="{A85E4909-6FCD-1BCA-8B58-E73F135CD6E1}|">
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scrips/SearchAndDestroy.cs">
+    <Files>
+      <File FileName="Assets/Scrips/TerrainManager.cs" Line="34" Column="11" />
+      <File FileName="Assets/Scrips/RandomMovement.cs" Line="39" Column="48" />
+      <File FileName="Assets/Scrips/SearchAndDestroy.cs" Line="71" Column="9" />
+      <File FileName="Assets/Scrips/Information.cs" Line="8" Column="66" />
+      <File FileName="Assets/Scrips/GreedyHunter.cs" Line="12" Column="31" />
+      <File FileName="Assets/Scrips/TestScriptNoObject.cs" Line="14" Column="2" />
+      <File FileName="Assets/Scrips/LookAt.cs" Line="19" Column="1" />
+      <File FileName="Assets/Scrips/BackAndForth.cs" Line="34" Column="114" />
+      <File FileName="Assets/Scrips/BBObstacleAvoidance.cs" Line="128" Column="6" />
+      <File FileName="Assets/Scrips/RandomWallBounce.cs" Line="43" Column="6" />
+      <File FileName="Assets/Scrips/ReactiveWaypointFollower.cs" Line="26" Column="44" />
+      <File FileName="Assets/Scrips/VelSetterOA.cs" Line="39" Column="6" />
+      <File FileName="Assets/Scrips/VelSetterLineFormation.cs" Line="61" Column="40" />
+      <File FileName="Assets/Scrips/VelSetterVOA.cs" Line="76" Column="6" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>
