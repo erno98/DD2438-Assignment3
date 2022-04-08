@@ -1,3 +1,9 @@
 Assignment_3/*
+Assignment_3/Assets/*
+
+!Assignment_3/
+!Assignment_3/Assets/
 !Assignment_3/Assets/Scripts/
 
+
+.DS_Store
