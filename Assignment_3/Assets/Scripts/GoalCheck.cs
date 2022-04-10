@@ -23,6 +23,7 @@ public class GoalCheck : MonoBehaviour
         if ((transform.position - ball_spawn_point.transform.position).magnitude > out_of_bounds)
         {
             transform.position = ball_spawn_point.transform.position;
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
     }
     private void OnCollisionEnter(Collision collision)
