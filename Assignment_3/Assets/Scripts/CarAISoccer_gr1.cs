@@ -27,8 +27,11 @@ namespace UnityStandardAssets.Vehicles.Car
         public float maxKickSpeed = 40f;
         public float lastKickTime = 0f;
 
+
+
         private void Start()
         {
+
             // get the car controller
             m_Car = GetComponent<CarController>();
             terrain_manager = terrain_manager_game_object.GetComponent<TerrainManager>();
@@ -37,6 +40,7 @@ namespace UnityStandardAssets.Vehicles.Car
             // note that both arrays will have holes when objects are destroyed
             // but for initial planning they should work
             friend_tag = gameObject.tag;
+            Debug.Log("Tag: " + friend_tag);
             if (friend_tag == "Blue")
                 enemy_tag = "Red";
             else
@@ -46,6 +50,7 @@ namespace UnityStandardAssets.Vehicles.Car
             enemies = GameObject.FindGameObjectsWithTag(enemy_tag);
 
             ball = GameObject.FindGameObjectWithTag("Ball");
+
 
 
             // Plan your path here
@@ -83,6 +88,8 @@ namespace UnityStandardAssets.Vehicles.Car
 
 
             // Execute your path here
+
+
             // ...
 
             Vector3 avg_pos = Vector3.zero;
@@ -128,11 +135,11 @@ namespace UnityStandardAssets.Vehicles.Car
             float grid_center_x = terrain_manager.myInfo.get_x_pos(i);
             float grid_center_z = terrain_manager.myInfo.get_z_pos(j);
 
-            Debug.DrawLine(transform.position, ball.transform.position, Color.black);
-            Debug.DrawLine(transform.position, own_goal.transform.position, Color.green);
-            Debug.DrawLine(transform.position, other_goal.transform.position, Color.yellow);
-            Debug.DrawLine(transform.position, friends[0].transform.position, Color.cyan);
-            Debug.DrawLine(transform.position, enemies[0].transform.position, Color.magenta);
+            // Debug.DrawLine(transform.position, ball.transform.position, Color.black);
+            // Debug.DrawLine(transform.position, own_goal.transform.position, Color.green);
+            // Debug.DrawLine(transform.position, other_goal.transform.position, Color.yellow);
+            // Debug.DrawLine(transform.position, friends[0].transform.position, Color.cyan);
+            // Debug.DrawLine(transform.position, enemies[0].transform.position, Color.magenta);
 
             if (CanKick())
             {

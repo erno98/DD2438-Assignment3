@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Unity.Barracuda;
 
 
 namespace UnityStandardAssets.Vehicles.Car
@@ -27,8 +28,36 @@ namespace UnityStandardAssets.Vehicles.Car
         public float maxKickSpeed = 40f;
         public float lastKickTime = 0f;
 
+        public static Model model = new Model();
+
+        // model takes:
+        // xy of 1st enemy (float, 0-1) -> 2 variables
+        // xy of 2nd enemy (float, 0-1) -> 2 variables
+        // xy of 3rd enemy (float, 0-1) -> 2 variables
+        // xy of the ball (float, 0-1) -> 2 variables
+        // in total tensor of 8
+
+        // outputs:
+        // handbrake, steer, throttle (float 0-1) for each car
+        // in total tensor of 9
+
+        public static IWorker engine;
+        public static Dictionary<int, List<float>> moves = new Dictionary<int, List<float>>();
+        public int car_idx;
+        public static int leader_car_idx = 0;
+        public static int car_count;
+        public static bool can_start = false;
+
         private void Start()
         {
+
+            car_idx = car_count;
+            if(car_idx == 2){
+                can_start = true;
+            }
+            car_count++;
+            moves.Add(car_idx, new List<float>(){0.0f, 0.0f, 0.0f});
+
             // get the car controller
             m_Car = GetComponent<CarController>();
             terrain_manager = terrain_manager_game_object.GetComponent<TerrainManager>();
@@ -48,6 +77,10 @@ namespace UnityStandardAssets.Vehicles.Car
             ball = GameObject.FindGameObjectWithTag("Ball");
 
 
+            if (car_idx == leader_car_idx){
+                model = ModelLoader.Load((NNModel)Resources.Load("model"));
+                engine = WorkerFactory.CreateWorker(model, WorkerFactory.Device.GPU);
+            }
             // Plan your path here
             // ...
         }
@@ -78,82 +111,54 @@ namespace UnityStandardAssets.Vehicles.Car
 
         }
 
+        private float standardize_pos(float pos, float min, float max){
+            return (pos - min)/(max - min);
+        }
+
         private void FixedUpdate()
         {
 
-
-            // Execute your path here
-            // ...
-
-            Vector3 avg_pos = Vector3.zero;
-
-            foreach (GameObject friend in friends)
-            {
-                avg_pos += friend.transform.position;
+            if (!can_start){
+                return;
             }
-            avg_pos = avg_pos / friends.Length;
-            //Vector3 direction = (avg_pos - transform.position).normalized;
-            Vector3 direction = (own_goal.transform.position - transform.position).normalized;
 
-            bool is_to_the_right = Vector3.Dot(direction, transform.right) > 0f;
-            bool is_to_the_front = Vector3.Dot(direction, transform.forward) > 0f;
+            if(car_idx == leader_car_idx){
+                var input = new Tensor(1, 1, 1, 8);
+                var tensor8D = new Tensor(new TensorShape(1, 1, 1, 1, 1, 1, 8, 1));
+                var max_x = other_goal.transform.position[0];
+                var min_x = own_goal.transform.position[0];
+                var max_y = other_goal.transform.position[2] + 50.0f;
+                var min_y = own_goal.transform.position[2] - 50.0f;;
 
-            float steering = 0f;
-            float acceleration = 0;
+                tensor8D[0] = standardize_pos(enemies[0].transform.position[0], min_x, max_x); // enemy1 x
+                tensor8D[1] = standardize_pos(enemies[0].transform.position[2], min_x, max_x); // enemy1 y
+                tensor8D[2] = standardize_pos(enemies[1].transform.position[0], min_x, max_x);  // enemy2 x
+                tensor8D[3] = standardize_pos(enemies[1].transform.position[2], min_x, max_x);  // enemy2 y
+                tensor8D[4] = standardize_pos(enemies[2].transform.position[0], min_x, max_x);  // enemy3 x
+                tensor8D[5] = standardize_pos(enemies[2].transform.position[2], min_x, max_x);  // enemy3 y
+                tensor8D[6] = standardize_pos(ball.transform.position[0], min_x, max_x);  // ball x
+                tensor8D[7] = standardize_pos(ball.transform.position[2], min_x, max_x);  // ball y
 
-            if (is_to_the_right && is_to_the_front)
-            {
-                steering = 1f;
-                acceleration = 1f;
-            }
-            else if (is_to_the_right && !is_to_the_front)
-            {
-                steering = -1f;
-                acceleration = -1f;
-            }
-            else if (!is_to_the_right && is_to_the_front)
-            {
-                steering = -1f;
-                acceleration = 1f;
-            }
-            else if (!is_to_the_right && !is_to_the_front)
-            {
-                steering = 1f;
-                acceleration = -1f;
+                var output = engine.Execute(tensor8D).PeekOutput();
+
+                Debug.Log("Predicted for 1st car: " + output[0] + ", " + output[1] + ", " + output[2]);
+                moves[0] = new List<float>(){output[0], output[1], output[2]};
+                moves[1] = new List<float>(){output[3], output[4], output[5]};
+                moves[2] = new List<float>(){output[6], output[7], output[8]};
+
             }
 
             // this is how you access information about the terrain
-            int i = terrain_manager.myInfo.get_i_index(transform.position.x);
-            int j = terrain_manager.myInfo.get_j_index(transform.position.z);
-            float grid_center_x = terrain_manager.myInfo.get_x_pos(i);
-            float grid_center_z = terrain_manager.myInfo.get_z_pos(j);
+            // int i = terrain_manager.myInfo.get_i_index(transform.position.x);
+            // int j = terrain_manager.myInfo.get_j_index(transform.position.z);
+            // float grid_center_x = terrain_manager.myInfo.get_x_pos(i);
+            // float grid_center_z = terrain_manager.myInfo.get_z_pos(j);
+            
+            var this_moves = moves[car_idx];
+            
+            m_Car.Move(this_moves[0], this_moves[1], this_moves[2], 0f);
 
-            Debug.DrawLine(transform.position, ball.transform.position, Color.black);
-            Debug.DrawLine(transform.position, own_goal.transform.position, Color.green);
-            Debug.DrawLine(transform.position, other_goal.transform.position, Color.yellow);
-            Debug.DrawLine(transform.position, friends[0].transform.position, Color.cyan);
-            Debug.DrawLine(transform.position, enemies[0].transform.position, Color.magenta);
 
-            if (CanKick())
-            {
-                Debug.DrawLine(transform.position, ball.transform.position, Color.red);
-                //KickBall(maxKickSpeed * Vector3.forward);
-            }
-
-            // this is how you control the car
-            //Debug.Log("Steering:" + steering + " Acceleration:" + acceleration);
-            m_Car.Move(steering, acceleration, acceleration, 0f);
-            //m_Car.Move(0f, -1f, 1f, 0f);
-
-            // this is how you kick the ball (if close enough)
-            // Note that the kick speed is added to the current speed of the ball (which might be non-zero)
-            Vector3 kickDirection = (other_goal.transform.position - transform.position).normalized;
-
-            // replace the human input below with some AI stuff
-            if (Input.GetKeyDown("space"))
-            {
-                KickBall(maxKickSpeed * kickDirection);
-            }
         }
     }
 }
