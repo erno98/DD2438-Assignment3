@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using Panda;
 
 
 namespace UnityStandardAssets.Vehicles.Car
@@ -11,7 +10,6 @@ namespace UnityStandardAssets.Vehicles.Car
     public class CarAISoccer_gr1 : MonoBehaviour
     {
         private CarController m_Car; // the car controller we want to use
-        private Rigidbody m_Car_Rigidbody;
 
         public GameObject terrain_manager_game_object;
         TerrainManager terrain_manager;
@@ -29,28 +27,20 @@ namespace UnityStandardAssets.Vehicles.Car
         public float maxKickSpeed = 40f;
         public float lastKickTime = 0f;
 
-        // PD Variables
-        private Vector3 targetSpeed, desiredSpeed, targetPos_K1;
-        private float k_p=2f, k_d=0.5f;
 
-        // Panda Behaviour Tree
-        PandaBehaviour SoccerBT;
 
         private void Start()
         {
-            // get Panda Behaviour Tree
-            SoccerBT = GetComponent<PandaBehaviour>();
 
             // get the car controller
             m_Car = GetComponent<CarController>();
             terrain_manager = terrain_manager_game_object.GetComponent<TerrainManager>();
-            m_Car_Rigidbody = GetComponent<Rigidbody>();
-
 
 
             // note that both arrays will have holes when objects are destroyed
             // but for initial planning they should work
             friend_tag = gameObject.tag;
+            Debug.Log("Tag: " + friend_tag);
             if (friend_tag == "Blue")
                 enemy_tag = "Red";
             else
@@ -61,52 +51,10 @@ namespace UnityStandardAssets.Vehicles.Car
 
             ball = GameObject.FindGameObjectWithTag("Ball");
 
-        }
-        private void Update()
-        {
-            // Behaviour Tree Reset/Tick
-            SoccerBT.Reset();
-            SoccerBT.Tick();
-        }
-
-        private void FixedUpdate()
-        {
-
-            Vector3 avg_pos = Vector3.zero;
-
-            foreach (GameObject friend in friends)
-            {
-                avg_pos += friend.transform.position;
-            }
-            avg_pos = avg_pos / friends.Length;
-            //Vector3 direction = (avg_pos - transform.position).normalized;
-            Vector3 direction = (ball.transform.position - transform.position).normalized;
-            direction = ball.transform.position; //temp!!!!!
-
-            DriveCar(direction);
-            
-            // ALL DEBUG LINES
-            Debug.DrawLine(transform.position, ball.transform.position, Color.black);
-            Debug.DrawLine(transform.position, own_goal.transform.position, Color.green);
-            Debug.DrawLine(transform.position, other_goal.transform.position, Color.yellow);
-            Debug.DrawLine(transform.position, friends[0].transform.position, Color.cyan);
-            Debug.DrawLine(transform.position, enemies[0].transform.position, Color.magenta);
-            if (CanKick())
-            {
-                Debug.DrawLine(transform.position, ball.transform.position, Color.red);
-                //KickBall(maxKickSpeed * Vector3.forward);
-            }
 
 
-            // this is how you kick the ball (if close enough)
-            // Note that the kick speed is added to the current speed of the ball (which might be non-zero)
-            Vector3 kickDirection = (other_goal.transform.position - transform.position).normalized;
-
-            // replace the human input below with some AI stuff
-            if (Input.GetKeyDown("space"))
-            {
-                KickBall(maxKickSpeed * kickDirection);
-            }
+            // Plan your path here
+            // ...
         }
 
         private bool CanKick()
@@ -135,70 +83,84 @@ namespace UnityStandardAssets.Vehicles.Car
 
         }
 
-        /// FUNCTIONS
-        // PD Tracker for Car
-        private void DriveCar(Vector3 targetPos)
+        private void FixedUpdate()
         {
-            // store previous
-            Vector3 currentPos = m_Car.transform.position;
-            targetSpeed = (targetPos - targetPos_K1) / Time.fixedDeltaTime;
-            targetPos_K1 = targetPos;
 
-            // Steering & Acceleration
-            var posError = targetPos - currentPos;
-            var speedError = targetSpeed - m_Car_Rigidbody.velocity;
-            var desiredDir = k_p * posError + k_d * speedError;
-            var steering = Vector3.Dot(desiredDir, transform.right);
-            var acceleration = Vector3.Dot(desiredDir, transform.forward);
 
-            Debug.DrawLine(targetPos, targetPos + targetSpeed, Color.red);
-            Debug.DrawLine(currentPos, currentPos + m_Car_Rigidbody.velocity, Color.blue);
-            Debug.DrawLine(currentPos, currentPos + desiredDir, Color.black);
-                
+            // Execute your path here
+
+
+            // ...
+
+            Vector3 avg_pos = Vector3.zero;
+
+            foreach (GameObject friend in friends)
+            {
+                avg_pos += friend.transform.position;
+            }
+            avg_pos = avg_pos / friends.Length;
+            //Vector3 direction = (avg_pos - transform.position).normalized;
+            Vector3 direction = (ball.transform.position - transform.position).normalized;
+
+            bool is_to_the_right = Vector3.Dot(direction, transform.right) > 0f;
+            bool is_to_the_front = Vector3.Dot(direction, transform.forward) > 0f;
+
+            float steering = 0f;
+            float acceleration = 0;
+
+            if (is_to_the_right && is_to_the_front)
+            {
+                steering = 1f;
+                acceleration = 1f;
+            }
+            else if (is_to_the_right && !is_to_the_front)
+            {
+                steering = -1f;
+                acceleration = -1f;
+            }
+            else if (!is_to_the_right && is_to_the_front)
+            {
+                steering = -1f;
+                acceleration = 1f;
+            }
+            else if (!is_to_the_right && !is_to_the_front)
+            {
+                steering = 1f;
+                acceleration = -1f;
+            }
+
+            // this is how you access information about the terrain
+            int i = terrain_manager.myInfo.get_i_index(transform.position.x);
+            int j = terrain_manager.myInfo.get_j_index(transform.position.z);
+            float grid_center_x = terrain_manager.myInfo.get_x_pos(i);
+            float grid_center_z = terrain_manager.myInfo.get_z_pos(j);
+
+            // Debug.DrawLine(transform.position, ball.transform.position, Color.black);
+            // Debug.DrawLine(transform.position, own_goal.transform.position, Color.green);
+            // Debug.DrawLine(transform.position, other_goal.transform.position, Color.yellow);
+            // Debug.DrawLine(transform.position, friends[0].transform.position, Color.cyan);
+            // Debug.DrawLine(transform.position, enemies[0].transform.position, Color.magenta);
+
+            if (CanKick())
+            {
+                Debug.DrawLine(transform.position, ball.transform.position, Color.red);
+                //KickBall(maxKickSpeed * Vector3.forward);
+            }
+
+            // this is how you control the car
+            //Debug.Log("Steering:" + steering + " Acceleration:" + acceleration);
             m_Car.Move(steering, acceleration, acceleration, 0f);
-        }
+            //m_Car.Move(0f, -1f, 1f, 0f);
 
-        //// Behaviour Tree Tasks /////
-        ///    IsGoalie, Defend 0.3, IsChaser, IsBallCloserThan 10.0, Dribble, InterceptBall
-        ///    
-        [Task]
-        bool IsGoalie()
-        {
-            Debug.Log("Is Goalie");
-            return true;
-        }
+            // this is how you kick the ball (if close enough)
+            // Note that the kick speed is added to the current speed of the ball (which might be non-zero)
+            Vector3 kickDirection = (other_goal.transform.position - transform.position).normalized;
 
-        [Task]
-        bool IsChaser()
-        {
-            Debug.Log("Not chaser");
-            return false;
-        }
-
-        [Task]
-        bool IsBallCloserThan(float distance)
-        {
-            bool close = Vector3.Distance(ball.transform.position, m_Car.transform.position) > distance;
-            Debug.Log("Ball is closer: " + close);
-            return close;
-        }
-
-        [Task]
-        void Defend(float distance)
-        {
-            Debug.Log("Defending");
-        }
-
-        [Task]
-        void InterceptBall()
-        {
-            Debug.Log("Intercept");
-        }
-
-        [Task]
-        void Dribble()
-        {
-            Debug.Log("Dribbling");
+            // replace the human input below with some AI stuff
+            if (Input.GetKeyDown("space"))
+            {
+                KickBall(maxKickSpeed * kickDirection);
+            }
         }
     }
 }
