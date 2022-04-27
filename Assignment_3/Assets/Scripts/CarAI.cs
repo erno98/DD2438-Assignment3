@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+//using Panda;
 
 
 namespace UnityStandardAssets.Vehicles.Car
@@ -18,11 +19,18 @@ namespace UnityStandardAssets.Vehicles.Car
 
         public GameObject my_goal_object;
 
+        private GraphEmbedding road_map;
+        private int CarNumber;
+
+        // Panda Behaviour Tree
+        //PandaBehaviour SoccerBT;
+
         private void Start()
         {
             // get the car controller
             m_Car = GetComponent<CarController>();
             terrain_manager = terrain_manager_game_object.GetComponent<TerrainManager>();
+            road_map = new GraphEmbedding(terrain_manager.terrain_filename, 1, 1);
 
             // Plan your path here
             // Replace the code below that makes a random path
@@ -31,7 +39,15 @@ namespace UnityStandardAssets.Vehicles.Car
             Vector3 start_pos = transform.position; // terrain_manager.myInfo.start_pos;
             Vector3 goal_pos = terrain_manager.myInfo.goal_pos;
 
-            friends = GameObject.FindGameObjectsWithTag("Car");
+            friends = GameObject.FindGameObjectsWithTag("CarBlimp");
+            for(int i = 0; i < friends.Length; i++)
+            {
+                if(friends[i].name == this.name)
+                {
+                    CarNumber = i;
+                    Debug.Log("I am Car Number:" + CarNumber);
+                }
+            }
 
             List<Vector3> my_path = new List<Vector3>();
 
@@ -70,7 +86,7 @@ namespace UnityStandardAssets.Vehicles.Car
             float grid_center_z = terrain_manager.myInfo.get_z_pos(j);
 
             //Debug.DrawLine(transform.position, new Vector3(grid_center_x, 0f, grid_center_z));
-
+            //road_map.draw_embedding(terrain_manager.myInfo);
 
             Vector3 relVect = my_goal_object.transform.position - transform.position;
             bool is_in_front = Vector3.Dot(transform.forward, relVect) > 0f;

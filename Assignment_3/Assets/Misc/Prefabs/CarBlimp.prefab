@@ -6025,6 +6025,10 @@ GameObject:
   - component: {fileID: 5781826396943105392}
   - component: {fileID: 5781826395899447671}
   - component: {fileID: 5781826395899447669}
+  - component: {fileID: 3899453844664848041}
+  - component: {fileID: 7894135480466083305}
+  - component: {fileID: 2423128165124203963}
+  - component: {fileID: 6845503540996687678}
   m_Layer: 0
   m_Name: CarBlimp
   m_TagString: Car
@@ -6186,6 +6190,117 @@ MonoBehaviour:
   terrain_manager_game_object: {fileID: 0}
   friends: []
   my_goal_object: {fileID: 0}
+--- !u!114 &3899453844664848041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5781826396937079010}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62430df10efb4cdfb402b4db45383984, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ignoreStartOrientation: 0
+  showGraph: 1
+  showPath: 1
+  showNodeOrientations: 1
+  showNodeWeights: 1
+  showBezierPath: 1
+  offset: 0.2
+  desired_res: 0.25
+  x_res_config: 0
+  z_res_config: 0
+  config_padding: 3
+  terrain: {fileID: 0}
+  PathCreator: {fileID: 0}
+  vertexSpacing: 0.1
+  individualControlPointOptimization: 0
+  asymmetricIndividualControlPointOptimization: 0
+  maxControlPointSpacing: 0.4
+  kCentralMovingAverage: 2
+  startPos: {x: 0, y: 0, z: 0}
+  goalPos: {x: 0, y: 0, z: 0}
+--- !u!114 &7894135480466083305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5781826396937079010}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 267ccab89ca5b384498f3f4f8e41b6f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  min_x: 0
+  max_x: 0
+  x_n: 0
+  x_res: 0
+  min_z: 0
+  max_z: 0
+  z_n: 0
+  z_res: 0
+  vertex_offset: 0
+  vis_path: []
+  path_status: 0
+  terrain_manager_game_object: {fileID: 0}
+--- !u!114 &2423128165124203963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5781826396937079010}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17e43e7170fb45b4b81dcd16d0ff55d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scripts:
+  - {fileID: 4900000, guid: e57f710ae24753946a6b9cbd8a7f37c1, type: 3}
+  autoReset: 1
+  tickOn: 3
+  sourceInfos:
+  - isFoldout: 1
+    breakPoints: 
+    breakPointStatuses: 
+    collapsedLines: 
+    btScript: 
+--- !u!114 &6845503540996687678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5781826396937079010}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 248a3b6dc4e2973439c1213b7d185e30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrain_manager_game_object: {fileID: 0}
+  graphObject: {fileID: 0}
+  kP: 1.5
+  kD: 1
+  desiredSpeed: 20
+  currentTopSpeed: 0
+  carState: 0
+  lasers: 1
+  verboseMode: 1
+  showCurvature: 1
+  tracking: 0
+  pathRadius: 8
+  nextNodeIncentive: 0.2
+  lookAheadVel: 0.5
+  lookAheadForward: 1
+  beta: 0.2
+  lookAheadDistance: 0.5
+  VelocityLookAhead: 20
+  frictionCoefficient: 0.2
+  earlyBraking: 1
+  decelDerate: 0.5
 --- !u!1 &5781826396937079012
 GameObject:
   m_ObjectHideFlags: 0

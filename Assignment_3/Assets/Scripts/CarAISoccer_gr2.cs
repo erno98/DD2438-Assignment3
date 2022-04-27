@@ -93,7 +93,7 @@ namespace UnityStandardAssets.Vehicles.Car
             }
             avg_pos = avg_pos / friends.Length;
             //Vector3 direction = (avg_pos - transform.position).normalized;
-            Vector3 direction = (own_goal.transform.position - transform.position).normalized;
+            Vector3 direction = (ball.transform.position - transform.position).normalized;
 
             bool is_to_the_right = Vector3.Dot(direction, transform.right) > 0f;
             bool is_to_the_front = Vector3.Dot(direction, transform.forward) > 0f;
