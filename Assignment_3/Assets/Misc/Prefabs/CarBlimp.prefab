@@ -6188,8 +6188,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrain_manager_game_object: {fileID: 0}
-  friends: []
   my_goal_object: {fileID: 0}
+  friends: []
 --- !u!114 &3899453844664848041
 MonoBehaviour:
   m_ObjectHideFlags: 0

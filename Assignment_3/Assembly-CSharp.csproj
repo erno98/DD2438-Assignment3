@@ -57,30 +57,16 @@
     <Compile Include="Assets\Scripts\TrajectoryLogger.cs" />
     <Compile Include="Assets\Scripts\LookAt.cs" />
     <Compile Include="Assets\Misc\Standard Assets\Vehicles\Car\Scripts\WheelEffects.cs" />
-    <Compile Include="Assets\Scripts\VisibilityPath.cs" />
     <Compile Include="Assets\Misc\Standard Assets\Vehicles\Car\Scripts\CarSelfRighting.cs" />
     <Compile Include="Assets\Misc\Standard Assets\Vehicles\Car\Scripts\Mudguard.cs" />
     <Compile Include="Assets\Panda.BT.free\Samples\03_Shooter\Assets\ShooterGameController.cs" />
-    <Compile Include="Assets\Scripts\GameManager.cs" />
-    <Compile Include="Assets\PathCreator\Examples\Scripts\GeneratePathExample.cs" />
-    <Compile Include="Assets\Panda.BT.free\Samples\02_PlayTag\Assets\Computer.cs" />
-    <Compile Include="Assets\Scripts\DroneAISoccer_blue.cs" />
     <Compile Include="Assets\Misc\Standard Assets\CrossPlatformInput\Scripts\ButtonHandler.cs" />
-    <Compile Include="Assets\Panda.BT.free\Samples\03_Shooter\Assets\Unit.cs" />
     <Compile Include="Assets\Misc\Standard Assets\CrossPlatformInput\Scripts\VirtualInput.cs" />
     <Compile Include="Assets\Panda.BT.free\Samples\02_PlayTag\Assets\Dialogue.cs" />
-    <Compile Include="Assets\Scripts\VisibilityGraph.cs" />
-    <Compile Include="Assets\Scripts\GoalCheck.cs" />
     <Compile Include="Assets\Panda.BT.free\Samples\03_Shooter\Assets\AI.cs" />
-    <Compile Include="Assets\Misc\Standard Assets\Vehicles\Car\Scripts\Suspension.cs" />
-    <Compile Include="Assets\Scripts\CarAI_PD_tracker.cs" />
-    <Compile Include="Assets\Misc\Standard Assets\Vehicles\Car\Scripts\CarController.cs" />
     <Compile Include="Assets\Panda.BT.free\Samples\01_Move\Assets\Move.cs" />
     <Compile Include="Assets\Scripts\DroneController.cs" />
     <Compile Include="Assets\Misc\Standard Assets\Vehicles\Car\Scripts\BrakeLight.cs" />
-    <Compile Include="Assets\PathCreator\Examples\Scripts\PathPlacer.cs" />
-    <Compile Include="Assets\Scripts\FollowDrone.cs" />
-    <Compile Include="Assets\Scripts\CarAISoccer_gr1.cs" />
     <Compile Include="Assets\Misc\Standard Assets\CrossPlatformInput\Scripts\TouchPad.cs" />
     <Compile Include="Assets\Misc\Standard Assets\CrossPlatformInput\Scripts\Joystick.cs" />
     <Compile Include="Assets\Scripts\CarAI.cs" />
@@ -92,37 +78,52 @@
     <Compile Include="Assets\Scripts\VehicleAI.cs" />
     <Compile Include="Assets\Misc\Standard Assets\Vehicles\Car\Scripts\CarAIControl.cs" />
     <Compile Include="Assets\Scripts\TerrainManager.cs" />
-    <Compile Include="Assets\Misc\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\StandaloneInput.cs" />
     <Compile Include="Assets\Misc\Standard Assets\Vehicles\Car\Scripts\SkidTrail.cs" />
-    <Compile Include="Assets\Panda.BT.free\Samples\03_Shooter\Assets\Patroller.cs" />
     <Compile Include="Assets\Scripts\RotateObject.cs" />
     <Compile Include="Assets\Panda.BT.free\Samples\03_Shooter\Assets\FollowCamera.cs" />
     <Compile Include="Assets\Scripts\GraphEmbedding.cs" />
     <Compile Include="Assets\Panda.BT.free\Samples\03_Shooter\Assets\AIVision.cs" />
-    <Compile Include="Assets\Scripts\DroneAI.cs" />
     <Compile Include="Assets\Panda.BT.free\Samples\03_Shooter\Assets\TriggerType.cs" />
+    <Compile Include="Assets\Scripts\DroneUserControl.cs" />
+    <Compile Include="Assets\Panda.BT.free\Samples\00_ChangeColor\Assets\MyCube.cs" />
+    <Compile Include="Assets\Scripts\CarAI_Grp8.cs" />
+    <Compile Include="Assets\Misc\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\MobileInput.cs" />
+    <Compile Include="Assets\Misc\Standard Assets\Vehicles\Car\Scripts\CarAudio.cs" />
+    <Compile Include="Assets\Panda.BT.free\Samples\03_Shooter\Assets\BulletImpact.cs" />
+    <Compile Include="Assets\Scripts\VisibilityPath.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\PathCreator\Examples\Scripts\GeneratePathExample.cs" />
+    <Compile Include="Assets\Panda.BT.free\Samples\02_PlayTag\Assets\Computer.cs" />
+    <Compile Include="Assets\Scripts\DroneAISoccer_blue.cs" />
+    <Compile Include="Assets\Panda.BT.free\Samples\03_Shooter\Assets\Unit.cs" />
+    <Compile Include="Assets\Scripts\VisibilityGraph.cs" />
+    <Compile Include="Assets\Scripts\GoalCheck.cs" />
+    <Compile Include="Assets\Misc\Standard Assets\Vehicles\Car\Scripts\Suspension.cs" />
+    <Compile Include="Assets\Scripts\CarAI_PD_tracker.cs" />
+    <Compile Include="Assets\Misc\Standard Assets\Vehicles\Car\Scripts\CarController.cs" />
+    <Compile Include="Assets\PathCreator\Examples\Scripts\PathPlacer.cs" />
+    <Compile Include="Assets\Scripts\FollowDrone.cs" />
+    <Compile Include="Assets\Scripts\CarAISoccer_gr1.cs" />
+    <Compile Include="Assets\Scripts\PathPlanner.cs" />
+    <Compile Include="Assets\Misc\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\StandaloneInput.cs" />
+    <Compile Include="Assets\Panda.BT.free\Samples\03_Shooter\Assets\Patroller.cs" />
+    <Compile Include="Assets\Scripts\DroneAI.cs" />
     <Compile Include="Assets\PathCreator\Examples\Scripts\PathSceneTool.cs" />
     <Compile Include="Assets\Scripts\DroneAISoccer_red.cs" />
     <Compile Include="Assets\Scripts\GameManagerSoccer.cs" />
     <Compile Include="Assets\PathCreator\Examples\Scripts\PathFollower.cs" />
     <Compile Include="Assets\Panda.BT.free\Samples\03_Shooter\Assets\Bullet.cs" />
     <Compile Include="Assets\Misc\Standard Assets\Vehicles\Car\Scripts\CarUserControl.cs" />
-    <Compile Include="Assets\Scripts\DroneUserControl.cs" />
-    <Compile Include="Assets\Panda.BT.free\Samples\00_ChangeColor\Assets\MyCube.cs" />
     <Compile Include="Assets\Misc\Standard Assets\CrossPlatformInput\Scripts\CrossPlatformInputManager.cs" />
     <Compile Include="Assets\Panda.BT.free\Samples\03_Shooter\Assets\UnitExplosion.cs" />
     <Compile Include="Assets\Scripts\FollowObject.cs" />
-    <Compile Include="Assets\Scripts\CarAI_Grp8.cs" />
     <Compile Include="Assets\Misc\Standard Assets\CrossPlatformInput\Scripts\InputAxisScrollbar.cs" />
-    <Compile Include="Assets\Misc\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\MobileInput.cs" />
     <Compile Include="Assets\Panda.BT.free\Samples\02_PlayTag\Assets\Player.cs" />
     <Compile Include="Assets\Misc\Standard Assets\CrossPlatformInput\Scripts\MobileControlRig.cs" />
     <Compile Include="Assets\Panda.BT.free\Samples\03_Shooter\Assets\HUD.cs" />
-    <Compile Include="Assets\Misc\Standard Assets\Vehicles\Car\Scripts\CarAudio.cs" />
     <Compile Include="Assets\Misc\Standard Assets\CrossPlatformInput\Scripts\AxisTouchButton.cs" />
-    <Compile Include="Assets\Panda.BT.free\Samples\03_Shooter\Assets\BulletImpact.cs" />
     <Compile Include="Assets\PathCreator\Examples\Scripts\RoadMeshCreator.cs" />
-    <Compile Include="Assets\Scripts\PathPlanner.cs" />
+    <Compile Include="Assets\Scripts\CarConfigSpace.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Panda.BT.free\Samples\02_PlayTag\Assets\TagDialogue.BT.txt" />
@@ -770,9 +771,6 @@
     <Reference Include="Unity.PlasticSCM.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="com.unity.multiplayer-weaver.Editor">
-      <HintPath>Library\ScriptAssemblies\com.unity.multiplayer-weaver.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
     </Reference>
@@ -784,6 +782,9 @@
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.multiplayer-weaver.Editor">
+      <HintPath>Library\ScriptAssemblies\com.unity.multiplayer-weaver.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
       <HintPath>Library\ScriptAssemblies\Unity.Analytics.DataPrivacy.dll</HintPath>
