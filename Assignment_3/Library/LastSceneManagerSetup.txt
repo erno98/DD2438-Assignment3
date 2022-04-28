@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/TrafficJam cars.unity
+- path: Assets/Scenes/TrafficJam drones.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

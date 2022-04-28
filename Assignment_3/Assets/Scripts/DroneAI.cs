@@ -24,6 +24,7 @@ public class DroneAI : MonoBehaviour
     // Variables for path & driving
     private bool MazeComplete;
     private float mazeTimer;
+    private Vector3 oldTargetPosition, olddronePosition, target_velocity;
 
 
     private bool ReducedDrones = false;
@@ -31,7 +32,7 @@ public class DroneAI : MonoBehaviour
     private void Start()
     {
         // Initialize Variables
-        Time.timeScale = 5;
+        Time.timeScale = 1;
         MazeComplete = false;
         mazeTimer = 0;
 
@@ -51,7 +52,7 @@ public class DroneAI : MonoBehaviour
         }
 
         // Debugger
-        if (DroneNumber%5==0)
+        if (DroneNumber%2==0)
         {
             ReducedDrones = true;
         }
@@ -85,20 +86,21 @@ public class DroneAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Debug.DrawLine(transform.position, new Vector3(grid_center_x, 0f, grid_center_z), Color.white, 1f);    
-        Vector3 relVect = my_goal_object.transform.position - transform.position;
-
+  
         mazeTimer += Time.deltaTime;
         if (!MazeComplete && ReducedDrones)
         {
-            m_Drone.Move_vect(my_path[path_index]);
+            path_index = PdDriveDrone(path_index);
+            /*
+            Vector3 relVect = 0.5f * ((transform.position - my_path[path_index]) / (transform.position - my_path[path_index]).sqrMagnitude);
+            m_Drone.Move_vect(relVect);
             //update to new path index
             if (Vector3.Distance(transform.position, my_path[path_index]) <= 4f)
             {
                 path_index= Mathf.Min(path_index + 1, my_path.Count - 1);
             }
-
-            if (Vector3.Distance(m_Drone.transform.position, my_goal_object.transform.position) < 4f)
+            */
+            if (Vector3.Distance(m_Drone.transform.position, my_goal_object.transform.position) < 6f)
             {
                 Debug.Log("Goal reached for drone: " + DroneNumber + " at time " + mazeTimer);
                 MazeComplete = true;
@@ -107,6 +109,8 @@ public class DroneAI : MonoBehaviour
         }
 
     }
+
+    
 
     // FUNC: Get direction of path
     private Orientation getPathDirection(Vector3 a, Vector3 b)
@@ -234,6 +238,50 @@ public class DroneAI : MonoBehaviour
 
         return upsampled_path;
     }
+
+    // FUNC: PD Controller for Drone
+    private int PdDriveDrone(int path_index)
+    {
+
+        RaycastHit hit;
+        Physics.Raycast(transform.position + transform.up, transform.TransformDirection(Vector3.forward), out hit, 50f);
+
+        float k_p = 1f;
+        float k_d = 1f;
+        // keep track of target position and velocity
+        Vector3 target_position = my_path[path_index];
+        Vector3 drone_position = m_Drone.transform.position;
+        if (path_index + 1 < my_path.Count)
+        {
+            target_velocity = Vector3.Normalize(my_path[path_index + 1] - oldTargetPosition) * 8;
+        }
+        else
+        {
+            target_velocity = (target_position - oldTargetPosition) / Time.fixedDeltaTime;
+        }
+        Vector3 drone_velocity = (drone_position - olddronePosition) / Time.fixedDeltaTime;
+        oldTargetPosition = target_position;
+        olddronePosition = drone_position;
+        // a PD-controller to get desired velocity
+        Vector3 position_error = target_position - transform.position;
+        Vector3 velocity_error = target_velocity - drone_velocity;
+        Vector3 desired_acceleration = k_p * position_error + k_d * velocity_error;
+        float steering = Vector3.Dot(desired_acceleration, transform.right);
+        float acceleration = Vector3.Dot(desired_acceleration, transform.forward);
+        m_Drone.Move(desired_acceleration[0], desired_acceleration[2]);
+
+        //Debug.DrawLine(target_position, steering, Color.white);
+        Debug.DrawLine(transform.position, transform.position + drone_velocity, Color.blue);
+        Debug.DrawLine(transform.position, transform.position + desired_acceleration, Color.black);
+
+        // Update to new index
+        if (Vector3.Distance(drone_position, target_position) < 5f)
+        {
+            path_index = Mathf.Min(path_index + 1, my_path.Count - 1);
+        }
+        return path_index;
+    }
+
 
     void OnDrawGizmos()
     {
