@@ -159,8 +159,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 175b5c7d166df4e7aa3c053a48f8af36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terrain_manager_game_object: {fileID: 0}
   my_goal_object: {fileID: 0}
+  terrain_manager_game_object: {fileID: 0}
+  Target: {x: 0, y: 0, z: 0}
   friends: []
 --- !u!114 &1478294031488993884
 MonoBehaviour:

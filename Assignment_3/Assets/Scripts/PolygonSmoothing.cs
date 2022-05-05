@@ -424,7 +424,7 @@ public class polygon_path // class represnting a polygonal path
 
         int start=0;
 
-        Debug.Log("********************************************************************************************************");
+        //Debug.Log("********************************************************************************************************");
 
         smoothed.Add(new Vector2(this.wp.waypoints[start].x,this.wp.waypoints[start].y));
 
@@ -445,8 +445,8 @@ public class polygon_path // class represnting a polygonal path
             }
 
             if(el.intersects_non_transversable() | max_distance>max_deviation){
-                Debug.Log("max distance: +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                Debug.Log(max_distance);
+                //Debug.Log("max distance: +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                //Debug.Log(max_distance);
                 //Debug.Log("start: "+this.wp.waypoints[start]);
                 //Debug.Log("end: "+this.wp.waypoints[end]);
                 start=end-1;
