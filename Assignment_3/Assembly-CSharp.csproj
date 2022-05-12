@@ -134,6 +134,7 @@
     <Compile Include="Assets\Scripts\Orientation.cs" />
     <Compile Include="Assets\Scripts\DroneAI_NoRoads.cs" />
     <Compile Include="Assets\Scripts\CarAI_NoRoads.cs" />
+    <Compile Include="Assets\Scripts\DroneAI_Intersection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Panda.BT.free\Samples\02_PlayTag\Assets\TagDialogue.BT.txt" />

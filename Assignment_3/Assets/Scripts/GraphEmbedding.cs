@@ -339,9 +339,9 @@ public class GraphEmbedding
         // method that checks if two cells are adjacent
         // note: we treat one point to be adjacent to itself
         // below for p1
-        //return Math.Sqrt(Math.Pow(x1-x2,2) + Math.Pow(y1-y2,2)) <= 1;
+        return Math.Sqrt(Math.Pow(x1-x2,2) + Math.Pow(y1-y2,2)) <= 1;
         // below for p2-p5
-        return ( Math.Abs(x1 - x2) <= 1 && Math.Abs(y1 - y2) <= 1);
+        //return ( Math.Abs(x1 - x2) <= 1 && Math.Abs(y1 - y2) <= 1);
     } 
 
     private bool is_different(int x1, int y1, int x2, int y2){
